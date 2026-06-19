@@ -8,7 +8,7 @@ import Login from "./Login";
 import Button from "./Header/Button";
 import PostForm from "./PostForm/PostForm";
 import Container from "./Container/Container";
-import LogoutBtn from "./Header/logoutbtn";
+import LogoutBtn from "./Header/Logoutbtn";
 import PostCard from "./Postcard";
 import AuthLayout from "./AuthLayout";
 import Input from "./Input";
