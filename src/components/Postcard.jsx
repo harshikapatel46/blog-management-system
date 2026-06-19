@@ -1,26 +1,40 @@
 import appwriteService from "../Appwrite/Config";
 import { Link } from "react-router-dom";
 
-function Postcard({ $id, title, featuredImage }) {
-  console.log(appwriteService.getFileView(featuredImage));
+function PostCard({ $id, title, featuredImage }) {
   return (
-    <Link
-      to={`/post/${$id}`}
-      className="block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
-    >
-      <div className="w-full bg-blue-700 rounded-xl p-4 ">
-        <div className="w-full h-48 justify-center overflow-hidden rounded-lg">
-          {featuredImage && (
-            <img
-              src={String(appwriteService.getFileView(featuredImage))}
-              alt={title}
-              className="w-full h-full rounded-xl object-cover"
-            />
-          )}
+    <Link to={`/post/${$id}`} className="block">
+      <article className="bg-[#C7B4F2] rounded-[40px] p-8 md:p-12 hover:scale-[1.01] transition-all duration-300">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          
+          <div>
+            <p className="text-sm uppercase tracking-widest mb-4">
+              Latest Post
+            </p>
+
+            <h2 className="text-4xl md:text-6xl font-black uppercase leading-none mb-6">
+              {title}
+            </h2>
+
+            <button className="px-6 py-3 border-2 border-black rounded-full font-semibold hover:bg-black hover:text-white transition">
+              Read Article →
+            </button>
+          </div>
+
+          <div>
+            {featuredImage && (
+              <img
+                src={appwriteService.getFileView(featuredImage)}
+                alt={title}
+                className="w-full h-[400px] object-cover rounded-[30px]"
+              />
+            )}
+          </div>
+
         </div>
-      </div>
+      </article>
     </Link>
   );
 }
 
-export default Postcard;
+export default PostCard;
