@@ -74,7 +74,7 @@ function PostForm({ post }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap">
-      <div className="w-2/3 px-2">
+      <div className="w-2/3   px-2">
         <Input
           label="Title :"
           placeholder="Title"
@@ -108,7 +108,7 @@ function PostForm({ post }) {
           {...register("image", { required: !post })}
         />
         {post && (
-          <div className="w-full mb-4">
+          <div className="w-full  rounded-4xl  mb-4">
             <img
               src={String(appwriteService.getFileView(post.featuredImage))}
               alt={post.title}

@@ -27,7 +27,7 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#E9DCCD]">
+      <div className="min-h-screen flex  items-center justify-center bg-[#E9DCCD]">
         Loading...
       </div>
     );
@@ -38,7 +38,7 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <Header />
 
-        <main className="flex">
+        <main className="flex-grow">
           <Outlet />
         </main>
 

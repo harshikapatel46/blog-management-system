@@ -43,13 +43,14 @@ function Home() {
             className="text-6xl md:text-8xl font-black uppercase leading-none"
             style={{ fontFamily: "Playfair Display, serif" }}
           >
-            Modern
+            PAGES &
             <br />
-            Journal
+            PERSPECTIVE
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
-            A collection of stories, ideas, inspiration and thoughtful writing.
+            Writing about technology, life, creativity, and everything in
+            between
           </p>
         </div>
       </section>

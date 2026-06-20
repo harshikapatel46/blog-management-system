@@ -13,7 +13,11 @@ function Logoutbtn() {
   };
   return (
     <button
-      className="font-[family-name:var(--font-heading,Supreme)] uppercase text-xs md:text-sm font-bold tracking-wide text-foreground hover:opacity-70 transition-opacity duration-200 px-2 py-1"
+      className="uppercase
+                        font-semibold
+                        tracking-widest
+                        hover:opacity-60
+                        transition"
       onClick={logoutHandler}
     >
       Logout
