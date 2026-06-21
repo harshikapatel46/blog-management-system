@@ -12,9 +12,7 @@ export default function Post() {
 
   const userData = useSelector((state) => state.auth.userData);
 
-  const isAuthor = post && userData
-    ? post.userId === userData.$id
-    : false;
+  const isAuthor = post && userData ? post.userId === userData.$id : false;
 
   useEffect(() => {
     if (slug) {
@@ -51,30 +49,28 @@ export default function Post() {
             >
               {post.title}
             </h1>
+            <p className="text-lg text-gray-600">
+              By {post.authorName || "Unknown Author"}
+            </p>
           </div>
 
           {/* Featured Image */}
           <div className="relative mb-12">
-            <div className="bg-[#C7B4F2] p-6 rounded-[40px] border-2 border-black">
+            <div className="bg-[#C7B4F2] p-6 rounded-[40px] border-2 border-black flex justify-center">
               <img
                 src={appwriteService.getFileView(post.featuredImage)}
                 alt={post.title}
-                className="w-full h-[350px] md:h-[600px] object-cover rounded-[30px]"
+                className="max-w-full max-h-[80vh] w-auto h-auto rounded-[30px]"
               />
             </div>
 
             {isAuthor && (
               <div className="absolute top-8 right-8 flex gap-3">
                 <Link to={`/edit-post/${post.$id}`}>
-                  <Button className="bg-[#A8E6A3]">
-                    Edit
-                  </Button>
+                  <Button className="bg-[#A8E6A3]">Edit</Button>
                 </Link>
 
-                <Button
-                  className="bg-[#FFB3B3]"
-                  onClick={deletePost}
-                >
+                <Button className="bg-[#FFB3B3]" onClick={deletePost}>
                   Delete
                 </Button>
               </div>
