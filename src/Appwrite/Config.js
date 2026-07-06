@@ -14,35 +14,38 @@ export class Service {
     this.bucket = new Storage(this.client);
   }
 
-  async createPost({
-    title,
-    slug,
-    content,
-    featuredImage,
-    status,
-    userId,
-    authorName,
-  }) {
-    try {
-      return await this.databases.createDocument(
-        conf.appwriteDatabaseId,
-        conf.appwriteCollectionId,
+ async createPost({
+  title,
+  slug,
+  content,
+  featuredImage,
+  status,
+  userId,
+  authorName,
+}) {
+  try {
+    return await this.databases.createDocument(
+      conf.appwriteDatabaseId,
+      conf.appwriteCollectionId,
+      ID.unique(),
+      {
+        title,
         slug,
-        {
-          title,
-          content,
-          featuredImage,
-          status,
-          userId,
-          authorName,
-        },
-      );
-    } catch (error) {
-      console.log("Appwrite serive :: createPost :: error", error);
-    }
+        content,
+        featuredImage,
+        status,
+        userId,
+        authorName,
+      }
+    );
+  } catch (error) {
+    console.log("Appwrite service :: createPost :: error", error);
   }
-
-  async updatePost(slug, { title, content, featuredImage, status, authorName }) {
+}
+  async updatePost(
+    slug,
+    { title, content, featuredImage, status, authorName },
+  ) {
     try {
       return await this.databases.updateDocument(
         conf.appwriteDatabaseId,
@@ -100,15 +103,18 @@ export class Service {
       return false;
     }
   }
-  async getAllPosts(queries = [Query.equal("status", "active")]) {
+  async getMyPosts(userId) {
     try {
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        queries,
+        [
+          Query.equal("status", "active"), 
+          Query.equal("userId", userId)
+        ],
       );
     } catch (error) {
-      console.log("Appwrite service :: getAllPosts :: error", error);
+      console.log("Appwrite serive :: getMyPosts :: error", error);
       return false;
     }
   }

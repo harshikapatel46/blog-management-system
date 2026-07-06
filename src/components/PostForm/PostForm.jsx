@@ -22,6 +22,8 @@ function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData);
 
   const onSubmit = async (data) => {
+    console.log("Submit clicked", data);
+
     try {
       if (post) {
         const file =
@@ -52,6 +54,7 @@ function PostForm({ post }) {
     } catch (err) {
       console.error(err);
     }
+
   };
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string")
@@ -125,7 +128,7 @@ function PostForm({ post }) {
         />
         <Button
           type="submit"
-          bgColor={post ? "bg-green-500" : undefined}
+          bgcolor={post ? "bg-green-500" : undefined}
           className="w-full"
         >
           {post ? "Update" : "Submit"}

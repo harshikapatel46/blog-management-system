@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { Container, PostCard } from "../components";
 import appwriteService from "../Appwrite/Config";
+import { useSelector } from "react-redux";
 
-function AllPosts() {
+function MyPosts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const user = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
+    if (!user) {
+      return;
+    }
+
     appwriteService
-      .getAllPosts()
+      .getMyPosts(user.$id)
       .then((response) => {
         if (response) {
           setPosts(response.documents);
@@ -17,7 +23,7 @@ function AllPosts() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [user]);
 
   if (loading) {
     return (
@@ -35,11 +41,11 @@ function AllPosts() {
             className="text-6xl md:text-8xl font-black uppercase leading-none"
             style={{ fontFamily: "Playfair Display, serif" }}
           >
-            Journal
+            My Posts
           </h1>
 
           <p className="mt-4 text-lg text-gray-700">
-            Stories, ideas, and inspiration from our blog.
+            Your personal collection of published posts
           </p>
         </div>
 
@@ -51,13 +57,9 @@ function AllPosts() {
           </div>
         ) : (
           <div className="bg-white rounded-[30px] p-12 text-center shadow-md">
-            <h2 className="text-3xl font-bold mb-4">
-              No Posts Available
-            </h2>
+            <h2 className="text-3xl font-bold mb-4">No Posts Available</h2>
 
-            <p className="text-gray-600">
-              Start creating amazing content.
-            </p>
+            <p className="text-gray-600">Start creating amazing content.</p>
           </div>
         )}
       </Container>
@@ -65,4 +67,4 @@ function AllPosts() {
   );
 }
 
-export default AllPosts;
+export default MyPosts;

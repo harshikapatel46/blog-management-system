@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
+  const user = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
 
   const navItems = [
@@ -24,7 +25,7 @@ function Header() {
       active: !authStatus,
     },
     {
-      name: "ALL POSTS",
+      name: "MY POSTS",
       slug: "/all-posts",
       active: authStatus,
     },
@@ -34,8 +35,7 @@ function Header() {
     <header className="sticky top-0 z-50 bg-[#E9DCCD] border-b-2 border-black">
       <Container>
         <nav className="flex items-center justify-between py-6">
-          
-          {/* Logo */}
+        
           <Link to="/">
             <h1
               className="text-5xl font-bold italic"
@@ -53,13 +53,7 @@ function Header() {
                   <li key={item.name}>
                     <button
                       onClick={() => navigate(item.slug)}
-                      className="
-                        uppercase
-                        font-semibold
-                        tracking-widest
-                        hover:opacity-60
-                        transition
-                      "
+                      className="uppercase font-semibold tracking-widest hover:opacity-60 transition"
                     >
                       {item.name}
                     </button>
@@ -68,24 +62,21 @@ function Header() {
             )}
           </ul>
 
-          {/* Right Buttons */}
+          {/* Right Side */}
           <div className="flex items-center gap-4">
             {authStatus && (
               <>
+                <p className="text-sm font-medium text-gray-700 whitespace-nowrap">
+                  Hello,{" "}
+                  <span className="font-bold text-black">
+                    {user?.name}
+                  </span>{" "}
+                  👋
+                </p>
+
                 <button
                   onClick={() => navigate("/add-post")}
-                  className="
-                    bg-[#FF8FAB]
-                    text-black
-                    px-6
-                    py-3
-                    rounded-full
-                    font-semibold
-                    border-2
-                    border-black
-                    hover:scale-105
-                    transition
-                  "
+                  className="bg-[#FF8FAB] text-black px-6 py-3 rounded-full font-semibold border-2 border-black hover:scale-105 transition"
                 >
                   + New Post
                 </button>
